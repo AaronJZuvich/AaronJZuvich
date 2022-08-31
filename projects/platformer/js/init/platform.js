@@ -44,9 +44,16 @@
     createPlatform(50, 390, 0.3);
     createPlatform(0, 421, 0.2);
     createPlatform(0, 300, 0.1, 0.2);
-    createPlatform(150, 200, 0.1, 0.2);
-    createPlatform(0, 100, 0.1, 0.2);
+    createPlatform(150, 180, 0.1, 0.2);
+    createPlatform(0, 90, 0.1, 0.2);
     createPlatform(40, 243, 0.02, 2);
+    createPlatform(300, 100, 0.02);
+    createPlatform(400, 185, 0.4, 0.2); //Don't forget to change 0.002 in case forgotten where
+    createPlatform(600, 200, 0.4, 0.2);
+    createPlatform(520, 180, 0.01, 15.5);
+    createPlatform(540, 180, 0.01, 15.5);
+    createPlatform(560, 180, 0.01, 15.5);
+    createPlatform(700, 500, 0.3, 0.1);
 
     createPlatform(100, 500, 0.0002, 9);
 
