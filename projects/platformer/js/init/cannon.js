@@ -34,6 +34,24 @@
     createCannon("bottom", 250);
     createCannon("top", 100);
     createCannon("right", 200, 2000);
+
+    //Force Reset Cannons
+    /**
+    createCannon("right", 0, 2000);
+    createCannon("right", 50, 2000);
+    createCannon("right", 100, 2000);
+    createCannon("right", 150, 2000);
+    createCannon("right", 250, 2000);
+    createCannon("right", 300, 2000);
+    createCannon("right", 350, 2000);
+    createCannon("right", 400, 2000);
+    createCannon("right", 450, 2000);
+    createCannon("right", 500, 2000);
+    createCannon("right", 550, 2000);
+    createCannon("right", 600, 2000);
+    createCannon("right", 650, 2000);
+    */
+    
     // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
   }
