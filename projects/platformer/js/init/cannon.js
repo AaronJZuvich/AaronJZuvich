@@ -27,9 +27,14 @@
     // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
 
     // example:
+    
+    //Main Cannons
+    
     createCannon("top", 450);
     createCannon("bottom", 450);
+    
     createCannon("left", 415);
+    
     createCannon("top", 350);
     createCannon("bottom", 250);
     createCannon("top", 100);
@@ -37,9 +42,12 @@
     createCannon("right", 0, 1500);
     createCannon("bottom", 542.5);
     createCannon("top", 542.5);
+    
+    createCannon("bottom", 820);
+    
 
     //Force Reset Cannons
-    /**
+    /*
     createCannon("right", 0, 2000);
     createCannon("right", 50, 2000);
     createCannon("right", 100, 2000);
