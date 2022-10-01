@@ -7,7 +7,7 @@
         <style type="text/css">
             body {
                 background:linear-gradient( rgb(101, 249, 33), rgb(255, 0 ,255), rgb(4, 194, 228)) fixed center;
-                background-image:url() ;
+                background-image:url(Images/VrChatImageBackground.png) ;
                 background-repeat: no-repeat;
                 color: rgb(45, 45, 45);
                 padding: 10px;
@@ -19,8 +19,8 @@
             }
    
             #all-contents {
-                max-width: 800px;
-                margin: auto;
+                width: 100%;
+                display: flex;
             }
    
             /* navigation menu */
@@ -84,52 +84,126 @@
              color: #454545;
          }
 
+         #ImageOne {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width:400px;
+         }
+
+         #ImageTwo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width:400px;
+         }
+
+         #leftColumn {
+            width:25%;
+            height:100%;
+            min-width: 300px;
+        }
+
+        #middleColumn {
+            width:50%;
+            height:100%;
+            min-width: 600px;
+        }
+
+        #middleHeader {
+            width: 100%;
+            height: 5%;
+        }
+
+        #middleBody {
+            width: 100%;
+            height: 20%;
+        }
+
+        #middleBottom {
+            width: 100%;
+            height: 75%;
+        }
+
+        #rightColumn {
+            width: 25%;
+            height:100%;
+            min-width: 300px;
+        }         
+        
         </style>
 
     </head>
 
     <body>
 
-        <img src="Images/I See No God.PNG" width = 450px; style = "position:absolute; left:285px; bottom:20px;">
-
         <div id="all-contents">
-            <nav>
-                
-                <h1> The Bloom </h1>
-                
-                <ul id="nav-ul">
-                    
-                    <li class="nav-li">
-
-                        <a class="nav-a" href="index.html">Home</a>
-
-                    </li>
-
-                    <li class="nav-li">
-                        
-                        <a class="nav-a" href="portfolio.html">Portfolio</a>
-                
-                    </li>
-                
-                </ul>
             
-            </nav>
+            <div id = "leftColumn">
             
-            <main>
+                <img id="ImageOne" src="Images/I See No God.PNG">
+            
+            </div>
+
+            <div id = "middleColumn">
+
+                <div id ="middleHeader">
+
+                    <nav>
                 
-                <div class="content">
+                        <h1> The Bloom </h1>
+                
+                        <ul id="nav-ul">
                     
-                    <h1> Portfolio </h1>
-                    
-                    <ul id="portfolio">
+                            <li class="nav-li">
+
+                                <a class="nav-a" href="index.html">Home</a>
+
+                            </li>
+
+                            <li class="nav-li">
                         
-                        <li><a href="projects/platformer/">Platformer : A cannon - dodging, collectible - grabbing adventure game for Halleb0t</a></li>
-                        <li><a href="projects/bouncing-box/">Bouncing Box : A project that gives you a taste of game development on the web </a></li>
-                        <li><a href="projects/circularity/">Circularity : A motion poem using random number generation and velocity applied to circle shapes...</a></li> 
-                    
-                    </ul>
+                                <a class="nav-a" href="portfolio.html">Portfolio</a>
+                
+                            </li>
+                
+                        </ul>
+            
+                    </nav>
+                
                 </div>
-            </main>
+                
+                <div id = "middleBody">
+
+                    <main>
+                
+                        <div class="content">
+                    
+                            <h1> Portfolio </h1>
+                    
+                            <ul id="portfolio">
+                        
+                                <li><a href="projects/platformer/">Platformer : A cannon - dodging, collectible - grabbing adventure game for Halleb0t</a></li>
+                                <li><a href="projects/bouncing-box/">Bouncing Box : A project that gives you a taste of game development on the web </a></li>
+                                <li><a href="projects/circularity/">Circularity : A motion poem using random number generation and velocity applied to circle shapes...</a></li> 
+                    
+                            </ul>
+                        </div>
+                    </main>
+                </div>
+
+                <div id = "middleBottom">
+
+                </div>
+
+            </div>
+
+            <div id = "rightColumn">
+
+                <img id="ImageTwo" src="Images/I See No God.PNG">
+
+            </div>
+
         </div>
     </body>
 </html>
