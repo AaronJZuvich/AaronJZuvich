@@ -123,7 +123,7 @@
 				changeBoxText(points);
 				points += 1;
 
-				var ranNum3 = Math.floor(Math.random() * 3);
+				var ranNum3 = Math.floor(Math.random() * 4);
 
 				if (ranNum3 = 1) {
 					speed = -speed;
@@ -131,6 +131,11 @@
 				
 				else if (ranNum3 = 2) {
 					speedY = -speedY;
+				}
+
+				else if (ranNum3 = 3) {
+					speed = speed;
+					speedY = speedY;
 				}
 
 				if (speed >= 0) {
