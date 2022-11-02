@@ -46,6 +46,25 @@
             
         </style>
 
+        <script>
+            
+            
+            function checkSubmit(e) {
+
+                if(e && e.keyCode == 13) {
+                    var L2Ref = document.getElementById("L2");
+                    var Input1Ref = document.getElementById("Input1");
+                    L2Ref.innerHTML += Input1Ref.value + "</br>";
+                    L2Ref.scrollTop = L2Ref.scrollHeight;
+                    Input1Ref.value = "";
+                }
+            }
+
+            function commandProcess() {
+                
+            }
+        </script>
+
     </head>
 
     <body>
@@ -54,10 +73,18 @@
         
         <p>This is an interesting style</p>
         
-        <form>
-            <input type="text"></input>
-        </form>
-    
+        <div id="L1">
+            <div id="L2" style="max-height:300px; overflow-y:hidden"> 
+                
+            </div>
+            
+            <div id="L3">
+                
+                <input placeholder="&#219" type="text" onkeypress="checkSubmit(event)" id="Input1"></input>
+                
+            </div>
+        </div>
+
     </body>
 </html>
 
