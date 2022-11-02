@@ -6,7 +6,7 @@
 
             body {
                 background-color: black;
-                background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+                background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 100%);
                 height: 100vh;
                 margin: 0;
                 overflow: hidden;
@@ -43,11 +43,33 @@
                 font: 1.3rem Inconsolata, monospace;
                 text-shadow: 0 0 5px #C8C8C8;
             }
-            
+            /*
+            #Whee {
+                overflow:hidden;
+                animation: typing 5s forwards;
+            }
+
+            @keyframes typing {
+                from {width: 0}
+                to {width: 100%}
+            }
+            */
         </style>
 
         <script>
-            
+
+            i = 0;
+            var txt = "doctument.getElementById(Whee).innerHTML;"
+            var speed = 50;
+
+            function typeWriter() {
+                if (i < txt.length) {
+                    document.getElementById("Whee").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+
             
             function checkSubmit(e) {
 
@@ -68,13 +90,12 @@
     </head>
 
     <body>
-        
-        <h1>Hi</h1>
-        
-        <p>This is an interesting style</p>
+        <div id="Whee" onclick="typeWriter()">
+            <h1>Winter's Howl</h1>
+        </div>
         
         <div id="L1">
-            <div id="L2" style="max-height:300px; overflow-y:hidden"> 
+            <div id="L2" style="max-height:70vh; overflow-y:hidden"> 
                 
             </div>
             
