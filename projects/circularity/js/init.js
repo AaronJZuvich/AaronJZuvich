@@ -89,7 +89,7 @@ var init = function (window) {
             var edgeX2 = circle.x + -circle.radius;
             var edgeY = circle.y + circle.radius;
             var edgeY2 = circle.y + -circle.radius;
-
+            
             if ( edgeX2 > canvas.width ) {
                 circle.x = 0;
             }
