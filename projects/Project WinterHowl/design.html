@@ -56,46 +56,374 @@
         </style>
 
         <script>
-            
-            i = 0;
-            var txt = document.getElementById("Whee").innerHTML;
-            var speed = 50;
+            var playerLoc;
+            var roomList = roomArray();
 
-            function typeWriter() {
-                if (i < txt.length) {
-                    document.getElementById("Whee").innerHTML += txt.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, speed);
-                }
+            var rooms = [[getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()], 
+            [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()],
+            [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()],
+            [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()],
+            [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()]];
+
+            
+            var player = {
+                playerLocColumn: 0,
+                playerLocRow: 0,
+                inventory: [],
             }
-            
-            
+                  
             function checkSubmit(e) {
 
                 if(e && e.keyCode == 13) {
                     var L2Ref = document.getElementById("L2");
                     var Input1Ref = document.getElementById("Input1");
                     
-                    L2Ref.innerHTML += Input1Ref.value + "</br>";
+                    L2Ref.innerHTML += "<br>" + Input1Ref.value + "</br> <br>";
+                    commandProcess(Input1Ref.value);
                     L2Ref.scrollTop = L2Ref.scrollHeight;
                     Input1Ref.value = "";
                 }
             }
 
-            function commandProcess() {
-                
+            function commandProcess(command) {
+                switch (command) {
+                    case "go right": {
+                        if (player.playerLocColumn < 4) {
+                            player.playerLocColumn += 1;
+                            showPlayerLoc();
+
+                            /*
+                            if (rooms[player.playerLocColumn + 1][player.playerLocRow]) {
+
+                            }
+                            */
+                        }
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+                    case "go left": {
+                        if (player.playerLocColumn > 0) {
+                            player.playerLocColumn -= 1;
+                            showPlayerLoc();
+                        }
+
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+                    case "go forward": {
+                        if (player.playerLocRow < 4) {
+                            player.playerLocRow += 1;
+                            showPlayerLoc();
+                        }
+
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+                    case "go back": {
+                        if (player.playerLocRow > 0) {
+                            player.playerLocRow -= 1;
+                            showPlayerLoc();
+                        }
+
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+                    case "go up": {
+                        if (playerLoc.uproom !== null) {
+                            playerLoc = playerLoc.uproom;
+                            showPlayerLoc();
+                        }
+
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+                    case "go down": {
+                        if (playerLoc.dowwnroom !== null) {
+                            playerLoc = playerLoc.dowwnroom;
+                            showPlayerLoc();
+                        }
+
+                        else {
+                            showMessage("Can't Go that way. <br>");
+                        }
+                        break;
+                    }
+
+                    case "pick up": {
+                        showMessage("pick up what? Type specifically what to pick up. <br>");
+                        break;
+                    }
+
+                    case "inventory": {
+                        if (player.inventory.length === 0) {
+                            showMessage("You have nothing in your inventory. <br>");
+                        }
+                        
+                        else {
+                            for (i = 0; i < player.inventory.length; i++) {
+                                showMessage("You have " + player.inventory[i] + "<br>");
+                            }
+                        }
+                        showMessage("");
+                        break;
+                    }
+
+                    case "check room": {
+                        showPlayerLoc();
+                        break;
+                    }
+
+                    case "help": {
+                            showMessage("go (left,right,back,forward, up, down) - goes in specified direction. <br> inventory - Checks Inventory <br> pick up *item* - Picks up an item <br> drop *item* - drops item in inventory <br>");
+                        break;
+                    }
+
+                    default: {
+                        if (command.substr(0, 7) === "pick up") {
+                            
+                            var itemPickUp = command.substring(8);
+                            var itemFound = false;
+
+                            for (i = 0; i < rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.length; i++) {
+                                if (rooms[player.playerLocColumn][player.playerLocRow].objectInRoom[i] === itemPickUp) {
+                                    showMessage("picked up");
+                                    player.inventory.push(rooms[player.playerLocColumn][player.playerLocRow].objectInRoom[i]);
+                                    rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.splice(i, 1);
+                                    itemFound = true
+                                    break;
+                                }
+                            }
+                                if (itemFound === false) {
+                                    showMessage("Item was not in this room.")
+                                }
+                        }
+
+                        else if (command.substr(0, 4) === "drop") {
+                            
+                            var itemDrop = command.substring(5);
+                            var itemFound = false;
+
+                            for (i = 0; i < player.inventory.length; i++) {
+                                if (player.inventory[i] === itemDrop) {
+                                    showMessage("Item dropped");
+                                    rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.push(player.inventory[i]);
+                                    player.inventory.splice(i, 1);
+                                    itemFound = true
+                                    break;
+                                }
+                            }
+                                if (itemFound === false) {
+                                    showMessage("Item was not in the inventory.")
+                                }
+                        }
+
+                        else {
+                            showMessage("I did not understand. <br> Type help if you need more information")
+                        }
+                        break;
+                    }
+                }
             }
+
+            function showPlayerLoc() {
+                showMessage(rooms[player.playerLocColumn][player.playerLocRow].description);
+                
+                if (rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.lenght !== 0) {
+                    for (i = 0; i < rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.length; i++)
+                    showMessage("There is a " + rooms[player.playerLocColumn][player.playerLocRow].objectInRoom[i] + " in the room")
+                }
+            }
+
+            function showMessage(message) {
+                var L2Ref = document.getElementById("L2");
+                L2Ref.innerHTML += message + "</br>";
+                L2Ref.scrollTop = L2Ref.scrollHeight;  
+            }
+
+            function roomArray() {
+                var Room1 = {
+                    name: "Room 1",
+                    description: "Room 1",
+                    playerStart: true,
+                    objectInRoom: ["Chest", "Lucky5"],
+                }
+                var Room2 = {
+                    name: "Room 2",
+                    description: "Room 2",
+                    playerStart: true,
+                    objectInRoom: ["Lu", "Lucky4"],
+                }
+                var Room3 = {
+                    name: "Room 3",
+                    description: "Room 3",
+                    playerStart: true,
+                    objectInRoom: ["Bu", "Lucky3"],
+                }
+                var Room4 = {
+                    name: "Room 4",
+                    description: "Room 4",
+                    playerStart: true,
+                    objectInRoom: ["Zu", "Lucky"],
+                }
+                var Room5 = {
+                    name: "Room 5",
+                    description: "Room 5",
+                    playerStart: true,
+                    objectInRoom: ["Tu", "Lucky2"],
+                }
+                var Room6 = {
+                    name: "Room 6",
+                    description: "Room 6",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room7 = {
+                    name: "Room 7",
+                    description: "Room 7",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room8 = {
+                    name: "Room 8",
+                    description: "Room 8",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room9 = {
+                    name: "Room 9",
+                    description: "Room 9",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room10 = {
+                    name: "Room 10",
+                    description: "Room 10",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room11 = {
+                    name: "Room 11",
+                    description: "Room 11",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room12 = {
+                    name: "Room 12",
+                    description: "Room 12",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room13 = {
+                    name: "Room 13",
+                    description: "Room 13",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room14 = {
+                    name: "Room 14",
+                    description: "Room 14",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room15 = {
+                    name: "Room 15",
+                    description: "Room 15",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room16 = {
+                    name: "Room 16",
+                    description: "Room 16",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room17 = {
+                    name: "Room 17",
+                    description: "Room 17",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room18 = {
+                    name: "Room 18",
+                    description: "Room 18",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room19 = {
+                    name: "Room 19",
+                    description: "Room 19",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room20 = {
+                    name: "Room 20",
+                    description: "Room 20",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room21 = {
+                    name: "Room 21",
+                    description: "Room 21",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room22 = {
+                    name: "Room 22",
+                    description: "Room 22",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room23 = {
+                    name: "Room 23",
+                    description: "Room 23",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room24 = {
+                    name: "Room 24",
+                    description: "Room 24",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+                var Room25 = {
+                    name: "Room 25",
+                    description: "Room 25",
+                    playerStart: true,
+                    objectInRoom: [],
+                }
+
+                var listOfRooms = [Room1, Room2, Room3, Room4, Room5, Room6, Room7, Room8, Room9, Room10, Room11, Room12, Room13, Room14, Room15, Room16, Room17, Room18, Room19, Room20, Room21, Room22, Room23, Room24, Room25];
+                return listOfRooms;
+            }
+
+            function getRandomRoom() {
+                var random = Math.floor(Math.random() * roomList.length);
+                var selectedRoom = roomList[random];
+                roomList.splice(random, 1);
+                return selectedRoom;
+            }
+
         </script>
 
     </head>
 
-    <body>
-        <div id="Whee" onclick="typeWriter()">
+    <body onload="showPlayerLoc()">
+        <div id="Whee">
             <h1>Winter's Howl</h1>
         </div>
         
         <div id="L1">
-            <div id="L2" style="max-height:70vh; overflow-y:hidden"> 
+            <div id="L2" style="max-height:70vh; overflow-y:scroll"> 
                 
             </div>
             
