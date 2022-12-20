@@ -200,6 +200,9 @@
                                     player.inventory.push(rooms[player.playerLocColumn][player.playerLocRow].objectInRoom[i]);
                                     rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.splice(i, 1);
                                     itemFound = true
+                                    if (checkPlayerWin() === true) {
+                                        showMessage("Congrates, you wasted your time to find all the items!")
+                                    }
                                     break;
                                 }
                             }
@@ -411,6 +414,16 @@
                 var selectedRoom = roomList[random];
                 roomList.splice(random, 1);
                 return selectedRoom;
+            }
+
+            function checkPlayerWin() {
+                if (player.inventory.length === 10) {
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
             }
 
         </script>
