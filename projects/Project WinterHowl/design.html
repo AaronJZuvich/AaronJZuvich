@@ -184,7 +184,7 @@
                     }
 
                     case "help": {
-                            showMessage("go (left,right,back,forward, up, down) - goes in specified direction. <br> inventory - Checks Inventory <br> pick up *item* - Picks up an item <br> drop *item* - drops item in inventory <br>");
+                            showMessage("go (left,right,back,forward, up, down) - goes in specified direction. <br> inventory - Checks Inventory <br> pick up *item* - Picks up an item <br> drop *item* - drops item in inventory <br> check room - Checks the current room you are in <br>");
                         break;
                     }
 
@@ -239,7 +239,7 @@
             }
 
             function showPlayerLoc() {
-                showMessage(rooms[player.playerLocColumn][player.playerLocRow].description);
+                showMessage("You have entered " + rooms[player.playerLocColumn][player.playerLocRow].description);
                 
                 if (rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.lenght !== 0) {
                     for (i = 0; i < rooms[player.playerLocColumn][player.playerLocRow].objectInRoom.length; i++)
@@ -255,34 +255,35 @@
 
             function roomArray() {
                 var Room1 = {
-                    name: "Room 1",
-                    description: "Room 1",
+                    name: "The Armory",
+                    description: "the armory",
                     playerStart: true,
-                    objectInRoom: ["Chest", "Lucky5"],
+                    objectInRoom: ["MK4 ELP", "HRLR", "EHPS", "LS"],
                 }
                 var Room2 = {
-                    name: "Room 2",
+                    name: "Hallway 1",
                     description: "Room 2",
                     playerStart: true,
-                    objectInRoom: ["Lu", "Lucky4"],
+                    objectInRoom: [],
                 }
                 var Room3 = {
-                    name: "Room 3",
+                    name: "Hallway 2",
                     description: "Room 3",
                     playerStart: true,
-                    objectInRoom: ["Bu", "Lucky3"],
+                    objectInRoom: [],
                 }
                 var Room4 = {
-                    name: "Room 4",
-                    description: "Room 4",
-                    playerStart: true,
-                    objectInRoom: ["Zu", "Lucky"],
+                    name: "Wall 1",
+                    description: "Wall",
+                    playerStart: false,
+                    playerCanEnter: false,
+                    objectInRoom: [],
                 }
                 var Room5 = {
                     name: "Room 5",
                     description: "Room 5",
                     playerStart: true,
-                    objectInRoom: ["Tu", "Lucky2"],
+                    objectInRoom: [],
                 }
                 var Room6 = {
                     name: "Room 6",
