@@ -88,22 +88,31 @@
             function commandProcess(command) {
                 switch (command) {
                     case "go right": {
+                        /*
+                        if (rooms[player.playerLocColumn + 1][player.playerLocRow].description === "Wall") {
+                            showMessage("Can't Go that way. There is a wall there.")
+                        }
+                        */
+
                         if (player.playerLocColumn < 4) {
                             player.playerLocColumn += 1;
                             showPlayerLoc();
-
-                            /*
-                            if (rooms[player.playerLocColumn + 1][player.playerLocRow]) {
-
-                            }
-                            */
                         }
+
                         else {
                             showMessage("Can't Go that way. <br>");
                         }
+
                         break;
                     }
                     case "go left": {
+
+                        /*
+                        if (rooms[player.playerLocColumn - 1][player.playerLocRow].description === "Wall") {
+                            showMessage("Can't Go that way. There is a wall there.")
+                        }
+                        */
+
                         if (player.playerLocColumn > 0) {
                             player.playerLocColumn -= 1;
                             showPlayerLoc();
@@ -115,6 +124,12 @@
                         break;
                     }
                     case "go forward": {
+                        /*
+                        if (rooms[player.playerLocColumn][player.playerLocRow + 1].description === "Wall") {
+                            showMessage("Can't Go that way. There is a wall there.")
+                        }
+                        */
+
                         if (player.playerLocRow < 4) {
                             player.playerLocRow += 1;
                             showPlayerLoc();
@@ -126,6 +141,12 @@
                         break;
                     }
                     case "go back": {
+                        /*
+                        if (rooms[player.playerLocColumn][player.playerLocRow - 1].description === "Wall") {
+                            showMessage("Can't Go that way. There is a wall there.")
+                        }
+                        */
+
                         if (player.playerLocRow > 0) {
                             player.playerLocRow -= 1;
                             showPlayerLoc();
