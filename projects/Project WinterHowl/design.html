@@ -65,10 +65,14 @@
             [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()],
             [getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom(), getRandomRoom()]];
 
-            
+            do {
+            var randomNum1 = getRandomNumber(4);
+            var randomNum2 = getRandomNumber(4);
+            } while (rooms[randomNum1][randomNum2].description === "Wall");
+
             var player = {
-                playerLocColumn: 0,
-                playerLocRow: 0,
+                playerLocColumn: randomNum1,
+                playerLocRow: randomNum2,
                 inventory: [],
             }
                   
@@ -88,15 +92,17 @@
             function commandProcess(command) {
                 switch (command) {
                     case "go right": {
-                        /*
-                        if (rooms[player.playerLocColumn + 1][player.playerLocRow].description === "Wall") {
-                            showMessage("Can't Go that way. There is a wall there.")
-                        }
-                        */
 
                         if (player.playerLocColumn < 4) {
-                            player.playerLocColumn += 1;
-                            showPlayerLoc();
+                            
+                            if (rooms[player.playerLocColumn + 1][player.playerLocRow].description === "Wall") {
+                                showMessage("Can't Go that way. There is a wall there.")
+                            }
+
+                            else {
+                                player.playerLocColumn += 1;
+                                showPlayerLoc();
+                            }
                         }
 
                         else {
@@ -107,15 +113,16 @@
                     }
                     case "go left": {
 
-                        /*
-                        if (rooms[player.playerLocColumn - 1][player.playerLocRow].description === "Wall") {
-                            showMessage("Can't Go that way. There is a wall there.")
-                        }
-                        */
-
                         if (player.playerLocColumn > 0) {
-                            player.playerLocColumn -= 1;
-                            showPlayerLoc();
+                            
+                            if (rooms[player.playerLocColumn - 1][player.playerLocRow].description === "Wall") {
+                                showMessage("Can't Go that way. There is a wall there.")
+                            }
+
+                            else {
+                                player.playerLocColumn -= 1;
+                                showPlayerLoc();
+                            }
                         }
 
                         else {
@@ -124,15 +131,17 @@
                         break;
                     }
                     case "go forward": {
-                        /*
-                        if (rooms[player.playerLocColumn][player.playerLocRow + 1].description === "Wall") {
-                            showMessage("Can't Go that way. There is a wall there.")
-                        }
-                        */
 
                         if (player.playerLocRow < 4) {
-                            player.playerLocRow += 1;
-                            showPlayerLoc();
+
+                            if (rooms[player.playerLocColumn][player.playerLocRow + 1].description === "Wall") {
+                                showMessage("Can't Go that way. There is a wall there.")
+                            }
+
+                            else {
+                                player.playerLocRow += 1;
+                                showPlayerLoc();
+                            }
                         }
 
                         else {
@@ -141,15 +150,17 @@
                         break;
                     }
                     case "go back": {
-                        /*
-                        if (rooms[player.playerLocColumn][player.playerLocRow - 1].description === "Wall") {
-                            showMessage("Can't Go that way. There is a wall there.")
-                        }
-                        */
 
                         if (player.playerLocRow > 0) {
-                            player.playerLocRow -= 1;
-                            showPlayerLoc();
+                        
+                            if (rooms[player.playerLocColumn][player.playerLocRow - 1].description === "Wall") {
+                                showMessage("Can't Go that way. There is a wall there.")
+                            }
+
+                            else {
+                                player.playerLocRow -= 1;
+                                showPlayerLoc();
+                            }
                         }
 
                         else {
@@ -446,6 +457,11 @@
                 else {
                     return false;
                 }
+            }
+
+            function getRandomNumber(Num) {
+                var randomNum = Math.floor(Math.random() * Num);
+                return randomNum;
             }
 
         </script>
